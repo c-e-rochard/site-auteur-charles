@@ -1,1 +1,833 @@
-<h1>Site en construction</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Dernier Souffle de Lara — C.E.Rochard</title>
+    <meta name="description" content="Dans La Ruche, chaque respiration vous est facturée. Roman SF dystopique de C.E.Rochard. Rejoignez la liste prioritaire avant la sortie.">
+    <meta name="author" content="C.E.Rochard">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Le Dernier Souffle de Lara — C.E.Rochard">
+    <meta property="og:description" content="Dans La Ruche, l'oxygène est une marchandise. Votre solde décide si vous respirez.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           RESET & VARIABLES CSS
+        ============================================================ */
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+
+        :root {
+            --bg-deep:        #06060d;
+            --bg-dark:        #09091a;
+            --bg-card:        #0e0e1f;
+            --bg-card-border: #141430;
+            --cyan:           #00d4ff;
+            --cyan-dim:       rgba(0, 212, 255, 0.20);
+            --cyan-glow:      rgba(0, 212, 255, 0.07);
+            --violet:         #7c3aed;
+            --violet-dim:     rgba(124, 58, 237, 0.25);
+            --violet-glow:    rgba(124, 58, 237, 0.08);
+            --orange:         #ff6b35;
+            --orange-dim:     rgba(255, 107, 53, 0.20);
+            --text-primary:   #e8e8f2;
+            --text-secondary: #8a8aaa;
+            --text-muted:     #44445a;
+            --border:         rgba(255,255,255,0.07);
+            --border-cyan:    rgba(0, 212, 255, 0.25);
+            --font-title:     'Orbitron', monospace;
+            --font-body:      'Inter', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.75;
+            overflow-x: hidden;
+        }
+
+        /* ============================================================
+           SCROLLBAR STYLISÉE
+        ============================================================ */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 3px; }
+
+        /* ============================================================
+           NAVBAR
+        ============================================================ */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.1rem 2.5rem;
+            background: rgba(6,6,13,0.80);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            transition: border-color 0.4s ease;
+        }
+        .navbar.scrolled { border-bottom-color: var(--border-cyan); }
+
+        .nav-brand {
+            font-family: var(--font-title);
+            font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--cyan); text-decoration: none;
+        }
+
+        .nav-status {
+            display: flex; align-items: center; gap: 0.55rem;
+            font-family: var(--font-title); font-size: 0.62rem;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .nav-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--orange);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%,100%{ opacity:1; transform:scale(1); }
+            50%{ opacity:0.35; transform:scale(0.75); }
+        }
+
+        /* ============================================================
+           HERO
+        ============================================================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            padding: 7rem 2rem 5rem;
+            overflow: hidden;
+        }
+
+        /* Grille animée */
+        .hero-grid {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(0,212,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,212,255,0.035) 1px, transparent 1px);
+            background-size: 56px 56px;
+            animation: grid-scroll 24s linear infinite;
+            mask-image: radial-gradient(ellipse 85% 75% at 50% 50%, black 30%, transparent 100%);
+        }
+        @keyframes grid-scroll {
+            from { background-position: 0 0; }
+            to   { background-position: 0 56px; }
+        }
+
+        /* Halos lumineux */
+        .hero-halo-1 {
+            position: absolute; border-radius: 50%;
+            width: 750px; height: 750px;
+            background: radial-gradient(circle, rgba(124,58,237,0.13) 0%, transparent 65%);
+            top: -280px; right: -220px; pointer-events: none;
+        }
+        .hero-halo-2 {
+            position: absolute; border-radius: 50%;
+            width: 550px; height: 550px;
+            background: radial-gradient(circle, rgba(0,212,255,0.09) 0%, transparent 65%);
+            bottom: -180px; left: -180px; pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative; z-index: 2;
+            max-width: 860px;
+        }
+
+        /* Pastille HUD */
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.55rem;
+            font-family: var(--font-title); font-size: 0.62rem;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--cyan);
+            border: 1px solid var(--cyan-dim);
+            background: var(--cyan-glow);
+            padding: 0.38rem 1rem; border-radius: 2px;
+            margin-bottom: 2.2rem;
+            animation: fadeup 0.9s ease both;
+        }
+        .hero-badge::before {
+            content: ''; width: 7px; height: 7px;
+            border-radius: 50%; background: var(--cyan);
+            animation: pulse-dot 1.4s ease-in-out infinite;
+        }
+
+        .hero-title {
+            font-family: var(--font-title);
+            font-size: clamp(2.4rem, 6.5vw, 5.2rem);
+            font-weight: 900; line-height: 1.05;
+            color: var(--text-primary);
+            margin-bottom: 1.4rem;
+            animation: fadeup 0.9s ease 0.14s both;
+        }
+        .hero-title .c { color: var(--cyan); text-shadow: 0 0 28px rgba(0,212,255,0.55); }
+        .hero-title .o { color: var(--orange); text-shadow: 0 0 28px rgba(255,107,53,0.50); }
+
+        .hero-tagline {
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            font-weight: 300; color: var(--text-secondary);
+            max-width: 640px; margin: 0 auto 0.8rem;
+            animation: fadeup 0.9s ease 0.28s both;
+        }
+        .hero-tagline strong { color: var(--text-primary); font-weight: 500; }
+
+        /* HUD mini-compteur atmosphérique */
+        .hero-hud {
+            font-family: var(--font-title); font-size: 0.62rem;
+            letter-spacing: 0.15em; color: var(--text-muted);
+            margin-bottom: 2.8rem;
+            animation: fadeup 0.9s ease 0.42s both;
+        }
+        .hero-hud .hud-val { color: var(--orange); }
+
+        /* Bouton CTA */
+        .btn-cta {
+            display: inline-flex; align-items: center; gap: 0.8rem;
+            font-family: var(--font-title); font-size: 0.82rem;
+            font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--bg-deep); background: var(--cyan);
+            padding: 1rem 2.6rem; border: none; border-radius: 2px;
+            cursor: pointer; text-decoration: none;
+            transition: all 0.3s ease;
+            animation: fadeup 0.9s ease 0.56s both;
+            position: relative; overflow: hidden;
+        }
+        .btn-cta::after {
+            content: ''; position: absolute; inset: 0;
+            background: white; opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .btn-cta:hover {
+            box-shadow: 0 0 32px rgba(0,212,255,0.65), 0 0 64px rgba(0,212,255,0.25);
+            transform: translateY(-2px);
+        }
+        .btn-cta:hover::after { opacity: 0.1; }
+        .btn-cta .arr { transition: transform 0.3s ease; }
+        .btn-cta:hover .arr { transform: translateX(5px); }
+
+        /* Ligne de scroll */
+        .scroll-hint {
+            position: absolute; bottom: 2.5rem; left: 50%;
+            transform: translateX(-50%);
+            animation: fadeup 1s ease 1.6s both;
+        }
+        .scroll-line {
+            width: 1px; height: 48px; margin: 0 auto;
+            background: linear-gradient(to bottom, var(--cyan), transparent);
+            animation: scroll-pulse 2.2s ease-in-out infinite;
+        }
+        @keyframes scroll-pulse {
+            0%   { transform: scaleY(0); transform-origin: top; }
+            50%  { transform: scaleY(1); transform-origin: top; }
+            51%  { transform: scaleY(1); transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+
+        /* ============================================================
+           UTILITAIRES SECTION
+        ============================================================ */
+        .section { padding: 6rem 2rem; position: relative; }
+        .section-inner { max-width: 900px; margin: 0 auto; }
+
+        .section-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            font-family: var(--font-title); font-size: 0.58rem;
+            letter-spacing: 0.3em; text-transform: uppercase;
+            color: var(--violet); margin-bottom: 1rem;
+        }
+        .section-eyebrow::before {
+            content: ''; display: inline-block;
+            width: 22px; height: 1px; background: var(--violet);
+        }
+
+        .section-title {
+            font-family: var(--font-title);
+            font-size: clamp(1.55rem, 3.5vw, 2.4rem);
+            font-weight: 700; line-height: 1.2;
+            color: var(--text-primary); margin-bottom: 2.8rem;
+        }
+        .section-title .c { color: var(--cyan); }
+
+        /* Animation reveal (IntersectionObserver) */
+        .reveal {
+            opacity: 0; transform: translateY(22px);
+            transition: opacity 0.75s ease, transform 0.75s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============================================================
+           SECTION L'UNIVERS
+        ============================================================ */
+        .s-univers {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .s-univers::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--violet) 50%, transparent 100%);
+        }
+
+        .univers-body {
+            display: flex; flex-direction: column; gap: 1.8rem;
+        }
+
+        .univers-p {
+            font-size: 0.98rem; color: var(--text-secondary); line-height: 1.95;
+        }
+        .univers-p strong { color: var(--text-primary); font-weight: 500; }
+        .univers-p .tc { color: var(--cyan); font-style: italic; }
+        .univers-p .to { color: var(--orange); }
+
+        /* Citation extraite */
+        .pull-quote {
+            border-left: 2px solid var(--violet);
+            background: var(--bg-card);
+            padding: 1.3rem 1.8rem;
+            border-radius: 0 4px 4px 0;
+            margin: 0.5rem 0;
+        }
+        .pull-quote p {
+            font-style: italic; color: var(--text-secondary); font-size: 1rem;
+        }
+        .pull-quote cite {
+            display: block; margin-top: 0.7rem;
+            font-style: normal; font-size: 0.72rem;
+            font-family: var(--font-title); color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+
+        /* Cartes concepts */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.4rem; margin-top: 3.2rem;
+        }
+        .concept-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px; padding: 1.5rem;
+            position: relative; overflow: hidden;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .concept-card:hover {
+            border-color: var(--border-cyan);
+            transform: translateY(-3px);
+        }
+        .concept-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+        }
+        .card-c::before { background: var(--cyan); }
+        .card-v::before { background: var(--violet); }
+        .card-o::before { background: var(--orange); }
+
+        .concept-tag {
+            font-family: var(--font-title); font-size: 0.57rem;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .card-c .concept-tag { color: var(--cyan); }
+        .card-v .concept-tag { color: var(--violet); }
+        .card-o .concept-tag { color: var(--orange); }
+
+        .concept-name {
+            font-family: var(--font-title); font-size: 0.92rem;
+            font-weight: 700; color: var(--text-primary); margin-bottom: 0.55rem;
+        }
+        .concept-desc { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.65; }
+
+        /* ============================================================
+           SECTION NEWSLETTER
+        ============================================================ */
+        .s-newsletter {
+            background: var(--bg-deep);
+            overflow: hidden;
+        }
+        .s-newsletter::before {
+            content: ''; position: absolute;
+            width: 650px; height: 650px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(124,58,237,0.11) 0%, transparent 65%);
+            top: -250px; left: -220px; pointer-events: none;
+        }
+        .s-newsletter::after {
+            content: ''; position: absolute;
+            width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 65%);
+            bottom: -150px; right: -150px; pointer-events: none;
+        }
+
+        .nl-box {
+            position: relative; z-index: 2;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px; padding: 3.5rem;
+            overflow: hidden;
+        }
+        .nl-box::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, var(--violet), var(--cyan));
+        }
+
+        /* Badge lead magnet */
+        .lm-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--orange-dim);
+            border: 1px solid rgba(255,107,53,0.3);
+            color: var(--orange);
+            font-family: var(--font-title); font-size: 0.6rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            padding: 0.38rem 0.9rem; border-radius: 2px;
+            margin-bottom: 1.4rem;
+        }
+
+        .nl-title {
+            font-family: var(--font-title);
+            font-size: clamp(1.35rem, 2.8vw, 1.95rem);
+            font-weight: 700; color: var(--text-primary);
+            line-height: 1.2; margin-bottom: 1rem;
+        }
+        .nl-title .c { color: var(--cyan); }
+
+        .nl-intro {
+            color: var(--text-secondary); font-size: 0.95rem;
+            line-height: 1.85; max-width: 580px; margin-bottom: 1.8rem;
+        }
+        .nl-intro strong { color: var(--text-primary); font-weight: 500; }
+
+        /* Liste bénéfices */
+        .benefits {
+            list-style: none;
+            display: flex; flex-direction: column; gap: 0.65rem;
+            margin-bottom: 2.5rem;
+        }
+        .benefits li {
+            display: flex; align-items: flex-start; gap: 0.75rem;
+            font-size: 0.9rem; color: var(--text-secondary);
+        }
+        .benefits li strong { color: var(--text-primary); font-weight: 500; }
+        .bi {
+            color: var(--cyan); font-family: var(--font-title);
+            font-size: 0.65rem; margin-top: 0.28rem; flex-shrink: 0;
+        }
+
+        /* Zone formulaire Brevo */
+        .brevo-zone {
+            background: rgba(0,212,255,0.03);
+            border: 1px dashed rgba(0,212,255,0.22);
+            border-radius: 4px; padding: 2rem 2rem 2rem;
+        }
+        .brevo-zone-label {
+            font-family: var(--font-title); font-size: 0.58rem;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--cyan); opacity: 0.65; margin-bottom: 1rem;
+        }
+
+        /* Note de confidentialité */
+        .privacy {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.76rem; color: var(--text-muted);
+            margin-top: 1.2rem;
+        }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            padding: 2.8rem 2rem;
+        }
+        .footer-inner {
+            max-width: 900px; margin: 0 auto;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 1rem; text-align: center;
+        }
+        .footer-brand {
+            font-family: var(--font-title); font-size: 0.72rem;
+            letter-spacing: 0.2em; color: var(--cyan); text-transform: uppercase;
+        }
+        .footer-nav {
+            display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+        }
+        .footer-nav a {
+            font-size: 0.78rem; color: var(--text-muted);
+            text-decoration: none; transition: color 0.2s ease;
+        }
+        .footer-nav a:hover { color: var(--text-secondary); }
+        .footer-copy {
+            font-size: 0.72rem; color: var(--text-muted);
+            font-family: var(--font-title); letter-spacing: 0.08em;
+        }
+
+        /* ============================================================
+           ANIMATIONS ENTRÉE
+        ============================================================ */
+        @keyframes fadeup {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 768px) {
+            .hero { padding: 5.5rem 1.5rem 4rem; }
+            .section { padding: 4rem 1.5rem; }
+            .nl-box { padding: 2rem 1.5rem; }
+            .concepts-grid { grid-template-columns: 1fr; }
+            .nav-status { display: none; }
+        }
+        @media (max-width: 480px) {
+            .btn-cta { padding: 0.85rem 1.6rem; font-size: 0.74rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ====================================================================
+     NAVBAR
+==================================================================== -->
+<nav class="navbar" id="navbar">
+    <a href="#" class="nav-brand">C.E.Rochard</a>
+    <div class="nav-status">
+        <span class="nav-dot"></span>
+        Roman en cours de rédaction
+    </div>
+</nav>
+
+
+<!-- ====================================================================
+     HERO
+==================================================================== -->
+<section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-halo-1"></div>
+    <div class="hero-halo-2"></div>
+
+    <div class="hero-content">
+
+        <!-- Pastille statut -->
+        <div class="hero-badge">Accès anticipé — Univers classifié</div>
+
+        <!-- Titre -->
+        <h1 class="hero-title">
+            Le Dernier <span class="c">Souffle</span><br>de <span class="o">Lara</span>
+        </h1>
+
+        <!-- Accroche principale -->
+        <p class="hero-tagline">
+            Dans <strong>La Ruche</strong>, l'air appartient à Omnis Corp.<br>
+            Chaque inspiration vous est débitée. Votre solde décide si vous respirez.
+        </p>
+
+        <!-- HUD atmosphérique animé -->
+        <p class="hero-hud">
+            OMNIS CORP — SECTEUR 7 &nbsp;|&nbsp;
+            SOLDE : <span class="hud-val" id="hud-val">—</span> CR &nbsp;|&nbsp;
+            LAG : <span class="hud-val" id="hud-lag">0,5s</span> &nbsp;|&nbsp;
+            MASQUE : <span class="hud-val">18% FUITE</span>
+        </p>
+
+        <!-- CTA -->
+        <a href="#univers" class="btn-cta">
+            Découvrir l'univers <span class="arr">→</span>
+        </a>
+
+    </div>
+
+    <div class="scroll-hint">
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+
+<!-- ====================================================================
+     SECTION L'UNIVERS
+==================================================================== -->
+<section class="section s-univers" id="univers">
+    <div class="section-inner">
+
+        <div class="section-eyebrow reveal">Worldbuilding</div>
+        <h2 class="section-title reveal">
+            Un monde où <span class="c">chaque<br>respiration a un prix</span>
+        </h2>
+
+        <div class="univers-body">
+
+            <p class="univers-p reveal">
+                <strong>La Ruche.</strong> Une mégalopole sous dôme, quelque part sur une Terre que l'atmosphère a cessé de protéger.
+                À l'intérieur, dix millions d'habitants survivent sous perfusion d'<span class="tc">oxygène synthétique</span>
+                produit, filtré et vendu par <strong>Omnis Corp</strong> — la seule autorité qui compte encore.
+                Chaque mètre cube d'air est comptabilisé, facturé, débité en temps réel depuis la puce implantée
+                à la base de votre nuque. Ici, la pauvreté ne se mesure pas en euros ni en privations alimentaires.
+                Elle se mesure en litres d'oxygène par heure — et en secondes de retard neurologique.
+            </p>
+
+            <p class="univers-p reveal">
+                À chaque citoyen, <span class="tc">un statut</span>. Les Prioritaires respirent librement au sommet des tours :
+                air filtré trois fois, température contrôlée, aucun décalage dans leurs gestes.
+                Les <span class="to">Non-Prioritaires</span> du Secteur 7, en bas, portent des masques fissurés
+                et subissent le <span class="tc">Bio-DRM</span> — un implant neurologique qui rallonge votre temps
+                de réaction proportionnellement à votre dette. Cinq cents crédits dans le rouge, et vos mains tremblent.
+                Dix mille crédits, et votre corps ne vous appartient plus. Le système ne vous punit pas.
+                Il <em>facture</em> votre résistance.
+            </p>
+
+            <div class="pull-quote reveal">
+                <p>« L'espoir ne remplit pas un réservoir. La soudure, si. »</p>
+                <cite>— Thorne, technicien V0, Secteur 7 — dette : 1 850 CR</cite>
+            </div>
+
+            <p class="univers-p reveal">
+                <strong>Thorne</strong> n'est pas un rebelle. C'est un technicien — un rouage qui déteste la machine
+                avec la précision d'un ingénieur. Il répare des systèmes de ventilation pour rembourser une dette
+                qui ne descend jamais. Jusqu'au jour où sa sœur <strong>Lara</strong>, sept ans, atteinte de la
+                <span class="to">Peste de la Ruche</span>, se retrouve classée Non-Prioritaire.
+                Son module respiratoire consomme des crédits qu'il n'a plus.
+                La mission est simple : voler au cœur de la <span class="tc">Tour Synthetix</span> un processeur
+                qui lui sauvera la vie. Ce que Thorne ne sait pas encore, c'est que cette tour ne dissimule
+                pas seulement des serveurs.
+                Elle abrite <strong>un secret</strong> qui condamne la Terre entière.
+            </p>
+
+        </div>
+
+        <!-- Trois concepts clés -->
+        <div class="concepts-grid">
+
+            <div class="concept-card card-c reveal">
+                <div class="concept-tag">Système // 001</div>
+                <div class="concept-name">Le Bio-DRM</div>
+                <p class="concept-desc">
+                    Puce implantée en C4. Vannes bronchiques sous contrôle réseau.
+                    Chaque respiration est une transaction. Votre corps appartient au contrat.
+                </p>
+            </div>
+
+            <div class="concept-card card-v reveal" style="transition-delay:0.14s">
+                <div class="concept-tag">Menace // 002</div>
+                <div class="concept-name">Le Lag</div>
+                <p class="concept-desc">
+                    Latence neurale proportionnelle à votre dette.
+                    0,5 seconde dès la naissance, si vous êtes V0.
+                    Au-delà de 10 000 crédits : Code d'Inertie. Paralysie. Irréversible.
+                </p>
+            </div>
+
+            <div class="concept-card card-o reveal" style="transition-delay:0.28s">
+                <div class="concept-tag">Secret // 003</div>
+                <div class="concept-name">Le Projet Arche</div>
+                <p class="concept-desc">
+                    La Purge sanitaire décime les secteurs bas.
+                    Ce n'est pas une purge. C'est une évacuation.
+                    2 847 places. Destination : orbitale. La Terre est condamnée.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ====================================================================
+     SECTION NEWSLETTER (cœur stratégique)
+==================================================================== -->
+<section class="section s-newsletter" id="newsletter">
+    <div class="section-inner">
+
+        <div class="nl-box reveal">
+
+            <!-- Badge lead magnet -->
+            <div class="lm-badge">⬡ &nbsp; Dossier confidentiel offert</div>
+
+            <!-- Titre -->
+            <h2 class="nl-title">
+                Accédez aux fichiers<br><span class="c">classifiés d'Omnis Corp</span>
+            </h2>
+
+            <!-- Texte d'accroche copywriting -->
+            <p class="nl-intro">
+                Le roman n'est pas encore sorti. Mais son univers, lui, est <strong>entièrement construit</strong>
+                — dans ses règles, ses contradictions et sa violence systémique.
+                Rejoignez la liste des <strong>lecteurs prioritaires</strong> et recevez immédiatement
+                le <strong>Dossier #001 : Anatomie de La Ruche</strong> — un document de référence exclusif
+                que les Non-Prioritaires ne verront jamais.
+            </p>
+
+            <!-- Bénéfices -->
+            <ul class="benefits">
+                <li>
+                    <span class="bi">▸</span>
+                    <span><strong>Le Dossier #001 en PDF</strong> — carte des Secteurs, lexique Bio-DRM, fiche personnages &amp; système de dette (accès immédiat à l'inscription)</span>
+                </li>
+                <li>
+                    <span class="bi">▸</span>
+                    <span><strong>Le Chapitre 1 en avant-première</strong> — les premières pages inédites du manuscrit, avant toute publication officielle</span>
+                </li>
+                <li>
+                    <span class="bi">▸</span>
+                    <span><strong>Les coulisses de construction</strong> — méthode d'écriture, règles d'univers, décisions d'auteur non-filtrées</span>
+                </li>
+                <li>
+                    <span class="bi">▸</span>
+                    <span><strong>L'alerte de sortie en priorité</strong> — notification le jour J, avant le grand public, avec offre de lancement exclusive</span>
+                </li>
+            </ul>
+
+            <!--
+            ====================================================================
+            INSÉRER LE SCRIPT DU FORMULAIRE BREVO ICI
+            ====================================================================
+            INSTRUCTIONS :
+            1. Connectez-vous à votre compte Brevo (ex-Sendinblue)
+            2. Menu : Contacts > Formulaires d'inscription
+            3. Créez ou sélectionnez votre formulaire (champs : Prénom + Email)
+            4. Cliquez sur "Intégrer" puis copiez le bloc HTML fourni
+            5. Collez-le CI-DESSOUS, en remplacement du texte placeholder
+            6. Supprimez la div.brevo-zone-label si Brevo génère son propre titre
+            ====================================================================
+            -->
+            <div class="brevo-zone">
+                <div class="brevo-zone-label">▸ Rejoindre la liste prioritaire</div>
+
+                <!-- INSÉRER LE SCRIPT DU FORMULAIRE BREVO ICI -->
+
+            </div>
+
+            <!-- Réassurance -->
+            <p class="privacy">
+                🔒&nbsp; Zéro spam. Désinscription en un clic à tout moment.
+                Vos données restent dans La Ruche — elles ne seront jamais revendues.
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ====================================================================
+     FOOTER
+==================================================================== -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">Le Dernier Souffle de Lara</div>
+        <nav class="footer-nav" aria-label="Liens de pied de page">
+            <a href="#" onclick="return false;">Mentions légales</a>
+            <a href="#" onclick="return false;">Politique de confidentialité</a>
+            <a href="#newsletter">Contact</a>
+        </nav>
+        <p class="footer-copy">Copyright &copy; 2026 &mdash; C.E.Rochard. Tous droits réservés.</p>
+    </div>
+</footer>
+
+
+<!-- ====================================================================
+     JAVASCRIPT
+==================================================================== -->
+<script>
+    /* ------------------------------------------------------------------
+       1. Navbar — effet scroll
+    ------------------------------------------------------------------ */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+
+    /* ------------------------------------------------------------------
+       2. Reveal on scroll — IntersectionObserver
+    ------------------------------------------------------------------ */
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.10, rootMargin: '0px 0px -35px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+    /* ------------------------------------------------------------------
+       3. HUD — animation compteur de dette (atmosphérique)
+    ------------------------------------------------------------------ */
+    const hudVal  = document.getElementById('hud-val');
+    const hudLag  = document.getElementById('hud-lag');
+
+    function animateDebt() {
+        const target   = 8500;
+        const duration = 3800;
+        const start    = performance.now();
+
+        function step(now) {
+            const t = Math.min((now - start) / duration, 1);
+            // Easing expo-out pour un effet "dette qui s'emballe"
+            const eased = 1 - Math.pow(1 - t, 4);
+            const val   = Math.floor(eased * target);
+            hudVal.textContent = val.toLocaleString('fr-FR');
+
+            // Lag corrélé à la dette
+            const lag = (0.5 + eased * 1.5).toFixed(1);
+            hudLag.textContent = lag + 's';
+
+            if (t < 1) {
+                requestAnimationFrame(step);
+            } else {
+                // Glitch final — instabilité du système
+                let count = 0;
+                const glitch = setInterval(() => {
+                    const jitter = target + Math.floor((Math.random() - 0.5) * 240);
+                    hudVal.textContent = jitter.toLocaleString('fr-FR');
+                    if (++count > 6) {
+                        clearInterval(glitch);
+                        hudVal.textContent = target.toLocaleString('fr-FR');
+                    }
+                }, 75);
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    // Lance après le fade-in du hero (1,2s de délai)
+    setTimeout(animateDebt, 1200);
+
+
+    /* ------------------------------------------------------------------
+       4. Smooth scroll — ancres internes
+    ------------------------------------------------------------------ */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const href = a.getAttribute('href');
+            if (!href || href === '#') return;
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
