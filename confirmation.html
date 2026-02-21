@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accès Autorisé — C.E.Rochard</title>
+    <meta name="description" content="Identification confirmée. Bienvenue dans le Secteur 7.">
+    <meta name="robots" content="noindex">
+
+    <!-- Google Fonts (identiques au site principal) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           RESET & VARIABLES (identiques à index.html)
+        ============================================================ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-deep:        #06060d;
+            --bg-dark:        #09091a;
+            --bg-card:        #0e0e1f;
+            --bg-card-border: #141430;
+            --cyan:           #00d4ff;
+            --cyan-dim:       rgba(0, 212, 255, 0.20);
+            --cyan-glow:      rgba(0, 212, 255, 0.07);
+            --violet:         #7c3aed;
+            --violet-dim:     rgba(124, 58, 237, 0.25);
+            --violet-glow:    rgba(124, 58, 237, 0.08);
+            --orange:         #ff6b35;
+            --orange-dim:     rgba(255, 107, 53, 0.20);
+            --green:          #22c55e;
+            --green-dim:      rgba(34, 197, 94, 0.15);
+            --green-glow:     rgba(34, 197, 94, 0.08);
+            --text-primary:   #e8e8f2;
+            --text-secondary: #8a8aaa;
+            --text-muted:     #44445a;
+            --border:         rgba(255,255,255,0.07);
+            --border-cyan:    rgba(0, 212, 255, 0.25);
+            --font-title:     'Orbitron', monospace;
+            --font-body:      'Inter', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.75;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 3px; }
+
+        /* ============================================================
+           NAVBAR (identique)
+        ============================================================ */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.1rem 2.5rem;
+            background: rgba(6,6,13,0.80);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-cyan);
+        }
+        .nav-brand {
+            font-family: var(--font-title);
+            font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--cyan); text-decoration: none;
+        }
+        .nav-back {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-family: var(--font-title); font-size: 0.6rem;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--text-muted); text-decoration: none;
+            border: 1px solid var(--border); padding: 0.35rem 0.8rem;
+            border-radius: 2px; transition: all 0.2s ease;
+        }
+        .nav-back:hover { color: var(--cyan); border-color: var(--cyan-dim); }
+
+        /* ============================================================
+           HERO CONFIRMATION
+        ============================================================ */
+        .confirm-hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            padding: 7rem 2rem 5rem;
+            overflow: hidden;
+        }
+
+        /* Grille animée (identique au hero principal) */
+        .confirm-grid {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(34,197,94,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34,197,94,0.04) 1px, transparent 1px);
+            background-size: 56px 56px;
+            animation: grid-scroll 24s linear infinite;
+            mask-image: radial-gradient(ellipse 85% 75% at 50% 50%, black 30%, transparent 100%);
+        }
+        @keyframes grid-scroll {
+            from { background-position: 0 0; }
+            to   { background-position: 0 56px; }
+        }
+
+        /* Halos (teinte verte pour "accès validé") */
+        .confirm-halo-1 {
+            position: absolute; border-radius: 50%;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(34,197,94,0.10) 0%, transparent 65%);
+            top: -250px; right: -200px; pointer-events: none;
+        }
+        .confirm-halo-2 {
+            position: absolute; border-radius: 50%;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 65%);
+            bottom: -150px; left: -150px; pointer-events: none;
+        }
+
+        .confirm-content {
+            position: relative; z-index: 2;
+            max-width: 720px;
+        }
+
+        /* ============================================================
+           SÉQUENCE DE BOOT TERMINAL
+        ============================================================ */
+        .boot-sequence {
+            font-family: var(--font-title);
+            font-size: 0.58rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            text-align: left;
+            display: inline-block;
+        }
+        .boot-line {
+            display: block;
+            opacity: 0;
+            animation: boot-in 0.3s ease forwards;
+        }
+        .boot-line:nth-child(1) { animation-delay: 0.3s; }
+        .boot-line:nth-child(2) { animation-delay: 0.7s; }
+        .boot-line:nth-child(3) { animation-delay: 1.1s; }
+        .boot-line:nth-child(4) { animation-delay: 1.5s; color: var(--green); }
+
+        @keyframes boot-in {
+            from { opacity: 0; transform: translateX(-8px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ============================================================
+           BADGE ACCÈS
+        ============================================================ */
+        .access-badge {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            font-family: var(--font-title); font-size: 0.62rem;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--green);
+            border: 1px solid rgba(34,197,94,0.35);
+            background: var(--green-glow);
+            padding: 0.42rem 1.1rem; border-radius: 2px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeup 0.8s ease 2s forwards;
+        }
+        .access-badge::before {
+            content: ''; width: 7px; height: 7px;
+            border-radius: 50%; background: var(--green);
+            animation: pulse-dot 1.4s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%,100%{ opacity:1; transform:scale(1); }
+            50%{ opacity:0.35; transform:scale(0.75); }
+        }
+
+        /* ============================================================
+           TITRE & TEXTE
+        ============================================================ */
+        .confirm-title {
+            font-family: var(--font-title);
+            font-size: clamp(1.6rem, 5vw, 3rem);
+            font-weight: 900; line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            animation: fadeup 0.8s ease 2.2s forwards;
+        }
+        .confirm-title .c { color: var(--cyan); text-shadow: 0 0 28px rgba(0,212,255,0.55); }
+        .confirm-title .g { color: var(--green); text-shadow: 0 0 28px rgba(34,197,94,0.50); }
+
+        .confirm-subtitle {
+            font-family: var(--font-title);
+            font-size: clamp(0.52rem, 1.1vw, 0.68rem);
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            white-space: nowrap;
+            opacity: 0;
+            animation: fadeup 0.8s ease 2.4s forwards;
+        }
+        .confirm-subtitle .val { color: var(--orange); }
+        @media (max-width: 580px) {
+            .confirm-subtitle { white-space: normal; font-size: 0.48rem; }
+        }
+
+        /* ============================================================
+           CARTE DE CONTENU (ce que le lecteur reçoit)
+        ============================================================ */
+        .reward-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 2.5rem;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeup 0.8s ease 2.6s forwards;
+        }
+        .reward-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, var(--green), var(--cyan));
+        }
+
+        .reward-label {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-family: var(--font-title); font-size: 0.56rem;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--cyan); margin-bottom: 1.2rem;
+        }
+        .reward-label::before {
+            content: ''; display: inline-block;
+            width: 18px; height: 1px; background: var(--cyan);
+        }
+
+        .reward-title {
+            font-family: var(--font-title);
+            font-size: clamp(1rem, 2.2vw, 1.35rem);
+            font-weight: 700; color: var(--text-primary);
+            line-height: 1.25; margin-bottom: 1rem;
+        }
+        .reward-title .c { color: var(--cyan); }
+
+        .reward-text {
+            font-size: 0.93rem; color: var(--text-secondary);
+            line-height: 1.85; margin-bottom: 1.8rem;
+        }
+        .reward-text strong { color: var(--text-primary); font-weight: 500; }
+
+        /* Bouton téléchargement */
+        .btn-download {
+            display: inline-flex; align-items: center; gap: 0.8rem;
+            font-family: var(--font-title); font-size: 0.78rem;
+            font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--bg-deep); background: var(--cyan);
+            padding: 0.9rem 2.2rem; border: none; border-radius: 2px;
+            cursor: pointer; text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+        .btn-download::after {
+            content: ''; position: absolute; inset: 0;
+            background: white; opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .btn-download:hover {
+            box-shadow: 0 0 32px rgba(0,212,255,0.65), 0 0 64px rgba(0,212,255,0.25);
+            transform: translateY(-2px);
+        }
+        .btn-download:hover::after { opacity: 0.1; }
+        .btn-download .icon { font-size: 1rem; transition: transform 0.3s ease; }
+        .btn-download:hover .icon { transform: translateY(2px); }
+
+        /* Séparateur */
+        .reward-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2rem 0;
+        }
+
+        /* Étapes suivantes */
+        .next-steps-label {
+            font-family: var(--font-title); font-size: 0.56rem;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--violet); margin-bottom: 1rem;
+        }
+
+        .steps-list {
+            list-style: none;
+            display: flex; flex-direction: column; gap: 0.8rem;
+        }
+        .steps-list li {
+            display: flex; align-items: flex-start; gap: 0.9rem;
+            font-size: 0.9rem; color: var(--text-secondary);
+        }
+        .steps-list li strong { color: var(--text-primary); font-weight: 500; }
+        .step-num {
+            font-family: var(--font-title); font-size: 0.58rem;
+            font-weight: 700; color: var(--bg-deep);
+            background: var(--violet);
+            width: 22px; height: 22px; min-width: 22px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-top: 0.15rem;
+        }
+
+        /* ============================================================
+           ENCADRÉ AVERTISSEMENT IN-UNIVERSE
+        ============================================================ */
+        .warning-box {
+            margin-top: 2.5rem;
+            background: rgba(255,107,53,0.04);
+            border: 1px solid rgba(255,107,53,0.18);
+            border-left: 3px solid var(--orange);
+            border-radius: 0 4px 4px 0;
+            padding: 1.1rem 1.4rem;
+            opacity: 0;
+            animation: fadeup 0.8s ease 3s forwards;
+        }
+        .warning-label {
+            font-family: var(--font-title); font-size: 0.52rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--orange); margin-bottom: 0.4rem;
+        }
+        .warning-box p {
+            font-size: 0.82rem; color: var(--text-muted);
+            line-height: 1.7; font-style: italic;
+        }
+
+        /* ============================================================
+           FOOTER (identique)
+        ============================================================ */
+        .footer {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            padding: 2.8rem 2rem;
+        }
+        .footer-inner {
+            max-width: 900px; margin: 0 auto;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 1rem; text-align: center;
+        }
+        .footer-brand {
+            font-family: var(--font-title); font-size: 0.72rem;
+            letter-spacing: 0.2em; color: var(--cyan); text-transform: uppercase;
+        }
+        .footer-nav {
+            display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+        }
+        .footer-nav a {
+            font-size: 0.78rem; color: var(--text-muted);
+            text-decoration: none; transition: color 0.2s ease;
+        }
+        .footer-nav a:hover { color: var(--text-secondary); }
+        .footer-copy {
+            font-size: 0.72rem; color: var(--text-muted);
+            font-family: var(--font-title); letter-spacing: 0.08em;
+        }
+
+        /* ============================================================
+           ANIMATIONS
+        ============================================================ */
+        @keyframes fadeup {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scanline subtile sur tout l'écran */
+        .confirm-hero::after {
+            content: ''; position: absolute; inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(34,197,94,0.008) 2px,
+                rgba(34,197,94,0.008) 4px
+            );
+            pointer-events: none; z-index: 1;
+        }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 768px) {
+            .confirm-hero { padding: 5.5rem 1.5rem 4rem; }
+            .reward-card { padding: 2rem 1.5rem; }
+            .navbar { padding: 1rem 1.2rem; }
+        }
+        @media (max-width: 480px) {
+            .btn-download { padding: 0.8rem 1.4rem; font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ====================================================================
+     NAVBAR
+==================================================================== -->
+<nav class="navbar">
+    <a href="index.html" class="nav-brand">C.E.Rochard</a>
+    <a href="index.html" class="nav-back">← Retour au site</a>
+</nav>
+
+
+<!-- ====================================================================
+     HERO — CONFIRMATION D'INSCRIPTION
+==================================================================== -->
+<section class="confirm-hero">
+    <div class="confirm-grid"></div>
+    <div class="confirm-halo-1"></div>
+    <div class="confirm-halo-2"></div>
+
+    <div class="confirm-content">
+
+        <!-- Séquence de boot terminal -->
+        <div class="boot-sequence" aria-hidden="true">
+            <span class="boot-line">▸ Connexion réseau Omnis Corp… OK</span>
+            <span class="boot-line">▸ Vérification identité citoyen… OK</span>
+            <span class="boot-line">▸ Attribution Secteur 7… OK</span>
+            <span class="boot-line">▸ ACCÈS AUTORISÉ — NIVEAU PRIORITAIRE</span>
+        </div>
+
+        <!-- Badge -->
+        <div class="access-badge">
+            Identification confirmée
+        </div>
+
+        <!-- Titre -->
+        <h1 class="confirm-title">
+            Bienvenue dans<br><span class="c">La Ruche</span>
+        </h1>
+
+        <!-- Sous-titre HUD -->
+        <p class="confirm-subtitle">
+            OMNIS CORP — SECTEUR 7 &nbsp;|&nbsp;
+            STATUT : <span class="val">PRIORITAIRE</span> &nbsp;|&nbsp;
+            ACCRÉD. : <span class="val">ACTIVE</span>
+        </p>
+
+        <!-- Carte reward -->
+        <div class="reward-card">
+
+            <div class="reward-label">Transmission sécurisée</div>
+
+            <h2 class="reward-title">
+                Dossier #001 : <span class="c">Anatomie de La Ruche</span>
+            </h2>
+
+            <p class="reward-text">
+                Votre accréditation a été enregistrée. Le <strong>Dossier #001</strong> est en cours
+                de transmission vers votre terminal — vérifiez votre boîte de réception
+                (et vos dossiers spam, les filtres de la Corpo sont paranoïaques).
+            </p>
+
+            <!--
+            ====================================================================
+            BOUTON TÉLÉCHARGEMENT DIRECT DU PDF
+            ====================================================================
+            INSTRUCTIONS :
+            1. Uploadez votre Dossier_001.pdf dans votre repository GitHub
+            2. Remplacez le href ci-dessous par le chemin réel du fichier
+               Exemple : href="assets/Dossier_001_Anatomie_Ruche.pdf"
+            3. Si vous préférez que le PDF soit UNIQUEMENT envoyé par email
+               via Brevo, supprimez ce bouton et gardez seulement les
+               instructions email ci-dessus.
+            ====================================================================
+            -->
+            <a href="#" class="btn-download" download>
+                <span class="icon">↓</span> Télécharger le Dossier #001
+            </a>
+
+            <hr class="reward-divider">
+
+            <!-- Étapes suivantes -->
+            <div class="next-steps-label">Protocole d'intégration</div>
+
+            <ol class="steps-list">
+                <li>
+                    <span class="step-num">1</span>
+                    <span><strong>Vérifiez votre terminal</strong> — un email de confirmation arrive dans les prochaines minutes. Si rien n'apparaît, inspectez le dossier spam.</span>
+                </li>
+                <li>
+                    <span class="step-num">2</span>
+                    <span><strong>Consultez le Dossier #001</strong> — carte des Secteurs, lexique Bio-DRM, fiches personnages et mécaniques de dette. Tout ce que la Corpo ne veut pas que vous sachiez.</span>
+                </li>
+                <li>
+                    <span class="step-num">3</span>
+                    <span><strong>Attendez les transmissions suivantes</strong> — Chapitre 1 en avant-première, coulisses de construction, et alerte de sortie en priorité. Vous serez prévenu avant tout le monde.</span>
+                </li>
+            </ol>
+
+        </div>
+
+        <!-- Avertissement in-universe -->
+        <div class="warning-box">
+            <div class="warning-label">⚠ Avis du Secteur 7</div>
+            <p>
+                Ce canal de communication n'est pas surveillé par Omnis Corp.
+                En théorie. Conservez vos accréditations. Ne partagez pas
+                ce dossier avec des citoyens non-vérifiés.
+                La prochaine transmission est programmée.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ====================================================================
+     FOOTER
+==================================================================== -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">Le Dernier Souffle de Lara</div>
+        <nav class="footer-nav" aria-label="Liens de pied de page">
+            <a href="index.html">Accueil</a>
+            <a href="a-propos.html">L'auteur</a>
+            <a href="mentions-legales.html">Mentions légales</a>
+            <a href="politique-confidentialite.html">Confidentialité</a>
+            <a href="index.html#newsletter">Contact</a>
+        </nav>
+        <p class="footer-copy">Copyright &copy; 2026 &mdash; C.E.Rochard. Tous droits réservés.</p>
+    </div>
+</footer>
+
+</body>
+</html>
