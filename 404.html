@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accès Refusé — C.E.Rochard</title>
+    <meta name="robots" content="noindex">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-deep:        #06060d;
+            --bg-dark:        #09091a;
+            --bg-card:        #0e0e1f;
+            --cyan:           #00d4ff;
+            --cyan-dim:       rgba(0, 212, 255, 0.20);
+            --cyan-glow:      rgba(0, 212, 255, 0.07);
+            --violet:         #7c3aed;
+            --orange:         #ff6b35;
+            --orange-dim:     rgba(255, 107, 53, 0.20);
+            --red:            #ef4444;
+            --red-dim:        rgba(239, 68, 68, 0.12);
+            --red-glow:       rgba(239, 68, 68, 0.06);
+            --text-primary:   #e8e8f2;
+            --text-secondary: #8a8aaa;
+            --text-muted:     #44445a;
+            --border:         rgba(255,255,255,0.07);
+            --border-cyan:    rgba(0, 212, 255, 0.25);
+            --font-title:     'Orbitron', monospace;
+            --font-body:      'Inter', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.75;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 3px; }
+
+        /* ============================================================
+           NAVBAR
+        ============================================================ */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.1rem 2.5rem;
+            background: rgba(6,6,13,0.80);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(239, 68, 68, 0.20);
+        }
+        .nav-brand {
+            font-family: var(--font-title);
+            font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--cyan); text-decoration: none;
+        }
+        .nav-back {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-family: var(--font-title); font-size: 0.6rem;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--text-muted); text-decoration: none;
+            border: 1px solid var(--border); padding: 0.35rem 0.8rem;
+            border-radius: 2px; transition: all 0.2s ease;
+        }
+        .nav-back:hover { color: var(--cyan); border-color: var(--cyan-dim); }
+
+        /* ============================================================
+           ZONE PRINCIPALE
+        ============================================================ */
+        .error-zone {
+            flex: 1;
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            padding: 7rem 2rem 5rem;
+            overflow: hidden;
+        }
+
+        /* Grille rouge */
+        .error-grid {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(239,68,68,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(239,68,68,0.035) 1px, transparent 1px);
+            background-size: 56px 56px;
+            animation: grid-scroll 24s linear infinite;
+            mask-image: radial-gradient(ellipse 85% 75% at 50% 50%, black 30%, transparent 100%);
+        }
+        @keyframes grid-scroll {
+            from { background-position: 0 0; }
+            to   { background-position: 0 56px; }
+        }
+
+        /* Halos */
+        .error-halo-1 {
+            position: absolute; border-radius: 50%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(239,68,68,0.09) 0%, transparent 65%);
+            top: -200px; right: -180px; pointer-events: none;
+        }
+        .error-halo-2 {
+            position: absolute; border-radius: 50%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 65%);
+            bottom: -120px; left: -120px; pointer-events: none;
+        }
+
+        /* Scanlines */
+        .error-zone::after {
+            content: ''; position: absolute; inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(239,68,68,0.006) 2px,
+                rgba(239,68,68,0.006) 4px
+            );
+            pointer-events: none; z-index: 1;
+        }
+
+        .error-content {
+            position: relative; z-index: 2;
+            max-width: 640px;
+        }
+
+        /* ============================================================
+           ALERTE BADGE
+        ============================================================ */
+        .alert-badge {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            font-family: var(--font-title); font-size: 0.6rem;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--red);
+            border: 1px solid rgba(239,68,68,0.35);
+            background: var(--red-glow);
+            padding: 0.4rem 1rem; border-radius: 2px;
+            margin-bottom: 2rem;
+            opacity: 0; animation: fadeup 0.7s ease 0.2s forwards;
+        }
+        .alert-badge::before {
+            content: ''; width: 7px; height: 7px;
+            border-radius: 50%; background: var(--red);
+            animation: pulse-alert 0.8s ease-in-out infinite;
+        }
+        @keyframes pulse-alert {
+            0%,100%{ opacity: 1; transform: scale(1); }
+            50%{ opacity: 0.3; transform: scale(0.7); }
+        }
+
+        /* ============================================================
+           CODE 404
+        ============================================================ */
+        .error-code {
+            font-family: var(--font-title);
+            font-size: clamp(5rem, 15vw, 10rem);
+            font-weight: 900;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(239,68,68,0.3);
+            position: relative;
+            margin-bottom: 1rem;
+            opacity: 0; animation: fadeup 0.7s ease 0.4s forwards;
+            user-select: none;
+        }
+        .error-code::after {
+            content: '404';
+            position: absolute; top: 0; left: 0; right: 0;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(239,68,68,0.12);
+            animation: code-glitch 4s ease-in-out infinite;
+        }
+        @keyframes code-glitch {
+            0%, 90%, 100% { transform: none; opacity: 0; }
+            92% { transform: translateX(4px) skewX(-2deg); opacity: 1; }
+            94% { transform: translateX(-3px) skewX(1deg); opacity: 1; }
+            96% { transform: translateX(2px); opacity: 1; }
+            98% { transform: none; opacity: 0; }
+        }
+
+        /* ============================================================
+           TEXTE
+        ============================================================ */
+        .error-title {
+            font-family: var(--font-title);
+            font-size: clamp(0.85rem, 2vw, 1.15rem);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 1.2rem;
+            opacity: 0; animation: fadeup 0.7s ease 0.6s forwards;
+        }
+        .error-title .r { color: var(--red); }
+
+        .error-text {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.85;
+            margin-bottom: 2.5rem;
+            opacity: 0; animation: fadeup 0.7s ease 0.8s forwards;
+        }
+
+        /* ============================================================
+           TERMINAL LOG
+        ============================================================ */
+        .error-log {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--red);
+            border-radius: 0 4px 4px 0;
+            padding: 1.2rem 1.4rem;
+            text-align: left;
+            margin-bottom: 2.5rem;
+            opacity: 0; animation: fadeup 0.7s ease 1s forwards;
+        }
+        .log-line {
+            font-family: var(--font-title); font-size: 0.52rem;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            line-height: 2;
+        }
+        .log-muted { color: var(--text-muted); }
+        .log-red { color: var(--red); }
+        .log-orange { color: var(--orange); }
+        .log-cyan { color: var(--cyan); }
+
+        /* ============================================================
+           BOUTONS
+        ============================================================ */
+        .error-actions {
+            display: flex; gap: 1rem;
+            justify-content: center; flex-wrap: wrap;
+            opacity: 0; animation: fadeup 0.7s ease 1.2s forwards;
+        }
+
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 0.7rem;
+            font-family: var(--font-title); font-size: 0.75rem;
+            font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--bg-deep); background: var(--cyan);
+            padding: 0.85rem 2rem; border: none; border-radius: 2px;
+            cursor: pointer; text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+        .btn-primary::after {
+            content: ''; position: absolute; inset: 0;
+            background: white; opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 32px rgba(0,212,255,0.65), 0 0 64px rgba(0,212,255,0.25);
+            transform: translateY(-2px);
+        }
+        .btn-primary:hover::after { opacity: 0.1; }
+
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 0.7rem;
+            font-family: var(--font-title); font-size: 0.68rem;
+            font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--text-muted);
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 0.85rem 1.6rem; border-radius: 2px;
+            cursor: pointer; text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-ghost:hover {
+            color: var(--text-secondary);
+            border-color: var(--border-cyan);
+        }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            padding: 2.8rem 2rem;
+        }
+        .footer-inner {
+            max-width: 900px; margin: 0 auto;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 1rem; text-align: center;
+        }
+        .footer-brand {
+            font-family: var(--font-title); font-size: 0.72rem;
+            letter-spacing: 0.2em; color: var(--cyan); text-transform: uppercase;
+        }
+        .footer-nav {
+            display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+        }
+        .footer-nav a {
+            font-size: 0.78rem; color: var(--text-muted);
+            text-decoration: none; transition: color 0.2s ease;
+        }
+        .footer-nav a:hover { color: var(--text-secondary); }
+        .footer-copy {
+            font-size: 0.72rem; color: var(--text-muted);
+            font-family: var(--font-title); letter-spacing: 0.08em;
+        }
+
+        /* ============================================================
+           ANIMATIONS
+        ============================================================ */
+        @keyframes fadeup {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 768px) {
+            .error-zone { padding: 6rem 1.5rem 4rem; }
+            .navbar { padding: 1rem 1.2rem; }
+            .error-log { padding: 1rem 1.1rem; }
+        }
+        @media (max-width: 480px) {
+            .error-actions { flex-direction: column; align-items: center; }
+            .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="index.html" class="nav-brand">C.E.Rochard</a>
+    <a href="index.html" class="nav-back">← Retour au site</a>
+</nav>
+
+
+<!-- ZONE 404 -->
+<main class="error-zone">
+    <div class="error-grid"></div>
+    <div class="error-halo-1"></div>
+    <div class="error-halo-2"></div>
+
+    <div class="error-content">
+
+        <div class="alert-badge">Violation de périmètre</div>
+
+        <div class="error-code">404</div>
+
+        <h1 class="error-title">
+            Zone <span class="r">prioritaire</span> — accès refusé
+        </h1>
+
+        <p class="error-text">
+            Vous tentez d'accéder à un secteur qui n'existe pas — ou qui a été purgé
+            par Omnis Corp. Votre tentative a été enregistrée. Retournez en zone autorisée
+            avant le déploiement du protocole de sécurité.
+        </p>
+
+        <!-- Terminal log -->
+        <div class="error-log">
+            <div class="log-line log-muted">▸ Requête interceptée par le réseau Omnis</div>
+            <div class="log-line log-red">▸ Erreur : secteur introuvable ou déclassifié</div>
+            <div class="log-line log-orange">▸ Crédits insuffisants pour forcer l'accès</div>
+            <div class="log-line log-cyan">▸ Redirection vers Secteur 7 recommandée</div>
+        </div>
+
+        <!-- Actions -->
+        <div class="error-actions">
+            <a href="index.html" class="btn-primary">
+                Retourner en zone sûre
+            </a>
+            <a href="index.html#newsletter" class="btn-ghost">
+                Demander une accréditation
+            </a>
+        </div>
+
+    </div>
+</main>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">Le Dernier Souffle de Lara</div>
+        <nav class="footer-nav" aria-label="Liens de pied de page">
+            <a href="index.html">Accueil</a>
+            <a href="a-propos.html">L'auteur</a>
+            <a href="mentions-legales.html">Mentions légales</a>
+            <a href="politique-confidentialite.html">Confidentialité</a>
+        </nav>
+        <p class="footer-copy">Copyright &copy; 2026 &mdash; C.E.Rochard. Tous droits réservés.</p>
+    </div>
+</footer>
+
+</body>
+</html>
