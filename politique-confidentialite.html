@@ -79,8 +79,8 @@
         .legal-section a { color: var(--cyan); text-decoration: none; }
         .legal-section a:hover { text-decoration: underline; }
         .legal-section ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 0.9rem; padding-left: 0.3rem; }
-        .legal-section ul li { font-size: 0.93rem; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 0.7rem; }
-        .legal-section ul li::before { content: "▸"; color: var(--violet); font-size: 0.65rem; margin-top: 0.3rem; flex-shrink: 0; }
+        .legal-section ul li { font-size: 0.93rem; color: var(--text-secondary); padding-left: 1.2rem; position: relative; }
+        .legal-section ul li::before { content: "▸"; color: var(--violet); font-size: 0.65rem; position: absolute; left: 0; top: 0.35rem; }
 
         /* Encadré info */
         .info-box {
@@ -103,14 +103,32 @@
         .fill-box .placeholder { color: var(--orange); font-style: italic; }
 
         /* Footer */
-        .legal-footer {
-            margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);
-            text-align: center;
+        .footer {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            padding: 2.8rem 2rem;
         }
-        .legal-footer p { font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-title); letter-spacing: 0.08em; }
-        .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap; }
-        .footer-links a { font-size: 0.78rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-        .footer-links a:hover { color: var(--text-secondary); }
+        .footer-inner {
+            max-width: 900px; margin: 0 auto;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 1rem; text-align: center;
+        }
+        .footer-brand {
+            font-family: var(--font-title); font-size: 0.72rem;
+            letter-spacing: 0.2em; color: var(--cyan); text-transform: uppercase;
+        }
+        .footer-nav {
+            display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+        }
+        .footer-nav a {
+            font-size: 0.78rem; color: var(--text-muted);
+            text-decoration: none; transition: color 0.2s ease;
+        }
+        .footer-nav a:hover { color: var(--text-secondary); }
+        .footer-copy {
+            font-size: 0.72rem; color: var(--text-muted);
+            font-family: var(--font-title); letter-spacing: 0.08em;
+        }
 
         /* Responsive */
         @media (max-width: 640px) {
@@ -149,7 +167,7 @@
         <div class="info-box">
             <strong>Responsable du traitement :</strong> C.E.ROCHARD<br>
             <strong>Contact :</strong>
-            <span style="color:var(--orange); font-style:italic;">contact@cerochard.com</span><br>
+            <a href="mailto:contact@cerochard.com" style="color:var(--orange); font-style:italic;">contact@cerochard.com</a><br>
             <strong>Base territoriale :</strong> Paris, France &mdash; Droit français et RGPD applicables
         </div>
     </section>
@@ -277,7 +295,7 @@
         <div class="fill-box">
             <div class="fill-label">📬 Pour exercer vos droits</div>
             <p>
-                Envoyez votre demande à : <span class="placeholder">contact@cerochard.com</span><br>
+                Envoyez votre demande à : <span class="placeholder"><a href="mailto:contact@cerochard.com">contact@cerochard.com</a></span><br>
                 Ou directement via le lien de désabonnement présent dans chaque e-mail reçu.<br>
                 Délai de réponse : <strong>30 jours maximum</strong> à compter de la réception de la demande.
             </p>
@@ -335,18 +353,21 @@
             les abonnés à la newsletter en seront informés par e-mail.
         </p>
     </section>
+</main>
 
-
-    <footer class="legal-footer">
-        <nav class="footer-links">
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">Le Dernier Souffle de Lara</div>
+        <nav class="footer-nav" aria-label="Liens de pied de page">
             <a href="index.html">Accueil</a>
+            <a href="a-propos.html">L'auteur</a>
             <a href="mentions-legales.html">Mentions légales</a>
-            <a href="politique-confidentialite.html">Politique de confidentialité</a>
+            <a href="politique-confidentialite.html">Confidentialité</a>
             <a href="index.html#newsletter">Contact</a>
         </nav>
-        <p>Copyright &copy; 2026 &mdash; C.E.ROCHARD. Tous droits réservés.</p>
-    </footer>
-</main>
+        <p class="footer-copy">Copyright &copy; 2026 &mdash; C.E.Rochard. Tous droits réservés.</p>
+    </div>
+</footer>
 
 </body>
 </html>
