@@ -85,6 +85,18 @@
             color: var(--cyan); text-decoration: none;
         }
 
+        .nav-links {
+            display: flex; align-items: center; gap: 1.8rem;
+        }
+        .nav-link {
+            font-family: var(--font-title); font-size: 0.58rem;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--text-muted); text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .nav-link:hover { color: var(--cyan); }
+        .nav-link.active { color: var(--text-secondary); }
+
         .nav-status {
             display: flex; align-items: center; gap: 0.55rem;
             font-family: var(--font-title); font-size: 0.62rem;
@@ -506,7 +518,12 @@
      NAVBAR
 ==================================================================== -->
 <nav class="navbar" id="navbar">
-    <a href="#" class="nav-brand">C.E.Rochard</a>
+    <a href="index.html" class="nav-brand">C.E.Rochard</a>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link active">Accueil</a>
+        <a href="a-propos.html" class="nav-link">L'auteur</a>
+        <a href="index.html#newsletter" class="nav-link">Contact</a>
+    </div>
     <div class="nav-status">
         <span class="nav-dot"></span>
         Roman en cours de rédaction
@@ -732,9 +749,11 @@
     <div class="footer-inner">
         <div class="footer-brand">Le Dernier Souffle de Lara</div>
         <nav class="footer-nav" aria-label="Liens de pied de page">
+            <a href="index.html">Accueil</a>
+            <a href="a-propos.html">L'auteur</a>
             <a href="mentions-legales.html">Mentions légales</a>
-            <a href="politique-confidentialite.html">Politique de confidentialité</a>
-            <a href="#newsletter">Contact</a>
+            <a href="politique-confidentialite.html">Confidentialité</a>
+            <a href="index.html#newsletter">Contact</a>
         </nav>
         <p class="footer-copy">Copyright &copy; 2026 &mdash; C.E.Rochard. Tous droits réservés.</p>
     </div>
