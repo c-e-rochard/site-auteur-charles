@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#06060d">
+    <title>Extrait — Chapitre 1 : Code d'Inertie | C.E.Rochard</title>
+    <meta name="description" content="Lisez le premier chapitre de Code d'Inertie : Chaque respiration a un prix. Thorne. Secteur 7. Niveau 0. La dette commence ici.">
+    <meta name="author" content="C.E.Rochard">
+    <meta name="keywords" content="Code d'Inertie, extrait, chapitre 1, cyberpunk, dystopie, Olymos, C.E.Rochard, lire">
+    <meta property="og:title" content="Extrait — Chapitre 1 : Code d'Inertie">
+    <meta property="og:description" content="Thorne. Secteur 7. Niveau 0. Solde : 1 850 CR. La dette commence ici.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.cerochard.com/extrait.html">
+    <meta property="og:image" content="https://www.cerochard.com/og-cover.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Extrait — Chapitre 1 : Code d'Inertie">
+    <meta name="twitter:description" content="Thorne. Secteur 7. Niveau 0. La dette commence ici.">
+    <meta name="twitter:image" content="https://www.cerochard.com/og-cover.jpg">
+    <link rel="canonical" href="https://www.cerochard.com/extrait.html">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><polygon points='32,4 58,19 58,45 32,60 6,45 6,19' fill='%2306060d' stroke='%2300d4ff' stroke-width='3'/><text x='32' y='42' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='22' fill='%2300d4ff'>O</text></svg>" type="image/svg+xml">
+
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-deep:        #06060d;
+            --bg-dark:        #09091a;
+            --bg-card:        #0e0e1f;
+            --bg-card-border: #141430;
+            --cyan:           #00d4ff;
+            --cyan-dim:       rgba(0, 212, 255, 0.20);
+            --cyan-glow:      rgba(0, 212, 255, 0.07);
+            --violet:         #7c3aed;
+            --violet-dim:     rgba(124, 58, 237, 0.25);
+            --orange:         #ff6b35;
+            --orange-dim:     rgba(255, 107, 53, 0.20);
+            --orange-glow:    rgba(255, 107, 53, 0.07);
+            --red:            #ff3b5c;
+            --text-primary:   #e8e8f2;
+            --text-secondary: #8a8aaa;
+            --text-muted:     #44445a;
+            --text-dim:       #2a2a42;
+            --border:         rgba(255,255,255,0.07);
+            --border-cyan:    rgba(0, 212, 255, 0.25);
+            --border-orange:  rgba(255, 107, 53, 0.25);
+            --font-title:     'Orbitron', monospace;
+            --font-body:      'Inter', sans-serif;
+            --font-prose:     'Crimson Pro', Georgia, serif;
+        }
+
+        html.light {
+            --bg-deep: #d8d8e2; --bg-dark: #d0d0dc; --bg-card: #dcdce8;
+            --bg-card-border: #b8b8cc;
+            --cyan: #007a9e; --cyan-dim: rgba(0,122,158,0.15); --cyan-glow: rgba(0,122,158,0.07);
+            --violet: #5b21b6; --violet-dim: rgba(91,33,182,0.15);
+            --orange: #b84500; --orange-dim: rgba(184,69,0,0.12); --orange-glow: rgba(184,69,0,0.06);
+            --red: #c0213c;
+            --text-primary: #12122a; --text-secondary: #38385a;
+            --text-muted: #70709a; --text-dim: #9898b8;
+            --border: rgba(0,0,0,0.10); --border-cyan: rgba(0,122,158,0.28);
+            --border-orange: rgba(184,69,0,0.28);
+        }
+        html.light body { background: var(--bg-deep); }
+        html.light .navbar { background: rgba(208,208,220,0.92) !important; }
+
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg-deep); color: var(--text-primary);
+            font-family: var(--font-body); line-height: 1.75; overflow-x: hidden;
+        }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
+
+        /* ── BARRE DE PROGRESSION ── */
+        .progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: var(--cyan); z-index: 1001; width: 0%;
+            transition: width 0.1s linear; pointer-events: none;
+        }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.1rem 2.5rem;
+            background: rgba(6,6,13,0.80); backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border); transition: border-color 0.4s ease;
+        }
+        .navbar.scrolled { border-bottom-color: var(--border-cyan); }
+        .nav-brand { font-family: var(--font-title); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan); text-decoration: none; }
+        .nav-links { display: flex; align-items: center; gap: 1.8rem; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+        .nav-link { font-family: var(--font-title); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s ease; position: relative; }
+        .nav-link:hover { color: var(--cyan); }
+        .nav-link.active { color: var(--cyan); text-shadow: 0 0 14px rgba(0,212,255,0.40); }
+        .nav-link:not(.active)::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--cyan); transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
+        .nav-classified { font-family: var(--font-title); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); background: transparent; border: 1px solid rgba(255,107,53,0.35); padding: 0.38rem 0.85rem; border-radius: 3px; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; text-decoration: none; }
+        .nav-classified:hover { background: rgba(255,107,53,0.12); border-color: var(--orange); box-shadow: 0 0 12px rgba(255,107,53,0.25); }
+
+        /* ── FIL D'ARIANE ── */
+        .breadcrumb {
+            display: flex; align-items: center; gap: 0.5rem;
+            list-style: none; padding: 0.5rem 2.5rem;
+            background: var(--bg-dark); border-bottom: 1px solid var(--border);
+            margin-top: 62px;
+        }
+        .breadcrumb li { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-title); font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+        .breadcrumb li::after { content: '›'; color: var(--text-dim); }
+        .breadcrumb li:last-child::after { display: none; }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: var(--cyan); }
+        .breadcrumb [aria-current="page"] { color: var(--cyan); }
+
+        /* ── HEADER CHAPITRE ── */
+        .chapter-header {
+            padding: 5rem 2rem 3rem;
+            max-width: 760px; margin: 0 auto;
+            text-align: center;
+        }
+        .chapter-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            font-family: var(--font-title); font-size: 0.58rem;
+            letter-spacing: 0.3em; text-transform: uppercase;
+            color: var(--orange); margin-bottom: 1.2rem;
+        }
+        .chapter-eyebrow::before { content: ''; display: inline-block; width: 22px; height: 1px; background: var(--orange); }
+        .chapter-eyebrow::after  { content: ''; display: inline-block; width: 22px; height: 1px; background: var(--orange); }
+        .chapter-title {
+            font-family: var(--font-title);
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 700; line-height: 1.2;
+            color: var(--text-primary); margin-bottom: 1rem;
+        }
+        .chapter-title .c { color: var(--cyan); }
+        .chapter-title .o { color: var(--orange); }
+        .chapter-meta {
+            font-family: var(--font-title); font-size: 0.58rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+        }
+        .chapter-meta .sep { color: var(--text-dim); margin: 0 0.6rem; }
+        .chapter-divider {
+            width: 60px; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--orange), transparent);
+            margin: 1.5rem auto 0;
+        }
+
+        /* ── CORPS DU TEXTE NARRATIF ── */
+        .prose-wrap {
+            max-width: 680px; margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+        .prose {
+            font-family: var(--font-prose);
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--text-primary);
+            letter-spacing: 0.01em;
+        }
+        html.light .prose { color: #1a1a30; }
+
+        .prose p { margin-bottom: 1.4em; }
+        .prose p + p { text-indent: 1.6em; margin-top: 0; }
+        .prose p:first-of-type { text-indent: 0; }
+
+        /* Dropcap sur premier paragraphe */
+        .prose p:first-of-type::first-letter {
+            float: left;
+            font-family: var(--font-title);
+            font-size: 3.8em;
+            line-height: 0.75;
+            margin-right: 0.12em;
+            margin-top: 0.1em;
+            color: var(--orange);
+            text-shadow: 0 0 20px var(--orange-dim);
+        }
+
+        /* Termes de l'univers */
+        .prose .term { color: var(--cyan); font-style: italic; }
+        .prose .credit { color: var(--orange); font-weight: 500; }
+        .prose .sys { color: var(--text-muted); font-family: var(--font-title); font-size: 0.78em; letter-spacing: 0.08em; }
+
+        /* Séparateur de scène */
+        .scene-break {
+            display: flex; align-items: center; justify-content: center;
+            gap: 0.8rem; margin: 2.5rem 0;
+            color: var(--text-dim); font-family: var(--font-title);
+            font-size: 0.55rem; letter-spacing: 0.3em;
+        }
+        .scene-break::before,
+        .scene-break::after {
+            content: ''; flex: 1; max-width: 80px; height: 1px;
+            background: var(--border);
+        }
+
+        /* HUD retinal inline */
+        .hud-line {
+            display: block;
+            font-family: var(--font-title);
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            border-left: 2px solid var(--cyan-dim);
+            padding: 0.5rem 1rem;
+            margin: 1.5rem 0;
+            line-height: 1.7;
+        }
+        .hud-line .hv { color: var(--cyan); }
+        .hud-line .hr { color: var(--orange); }
+
+        /* ── CTA FIN D'EXTRAIT ── */
+        .cta-section {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 2px; background: linear-gradient(90deg, var(--orange), var(--cyan));
+        }
+        .cta-eyebrow {
+            font-family: var(--font-title); font-size: 0.58rem;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--orange); margin-bottom: 0.8rem;
+        }
+        .cta-title {
+            font-size: 1.25rem; font-weight: 500;
+            color: var(--text-primary); margin-bottom: 0.6rem;
+            max-width: 500px; margin-left: auto; margin-right: auto;
+        }
+        .cta-sub {
+            font-size: 0.9rem; color: var(--text-secondary);
+            margin-bottom: 1.8rem; max-width: 480px;
+            margin-left: auto; margin-right: auto;
+        }
+        .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 0.7rem;
+            font-family: var(--font-title); font-size: 0.72rem;
+            font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--bg-deep); background: var(--orange);
+            padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover { box-shadow: 0 0 28px rgba(255,107,53,0.55); transform: translateY(-2px); }
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 0.7rem;
+            font-family: var(--font-title); font-size: 0.72rem;
+            font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--cyan); background: transparent;
+            border: 1px solid var(--border-cyan);
+            padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-ghost:hover { background: var(--cyan-glow); border-color: var(--cyan); }
+
+        /* ── FOOTER ── */
+        .footer { background: var(--bg-dark); border-top: 1px solid var(--border); padding: 2.8rem 2rem; }
+        .footer-inner { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+        .footer-brand { font-family: var(--font-title); font-size: 0.72rem; letter-spacing: 0.2em; color: var(--cyan); text-transform: uppercase; }
+        .footer-nav { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+        .footer-nav a { font-size: 0.78rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s ease; position: relative; }
+        .footer-nav a:hover { color: var(--text-secondary); }
+        .footer-nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--cyan); transition: width 0.3s ease; }
+        .footer-nav a:hover::after { width: 100%; }
+        .footer-copy { font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-title); letter-spacing: 0.08em; }
+
+        .theme-toggle { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 200; width: 46px; height: 46px; border: 1px solid var(--border-cyan); border-radius: 50%; background: var(--bg-card); color: var(--cyan); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; transition: all 0.3s ease; backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .theme-toggle:hover { transform: scale(1.1); box-shadow: 0 0 22px rgba(0,212,255,0.25); border-color: var(--cyan); }
+        .theme-toggle .icon-sun { display: inline; } .theme-toggle .icon-moon { display: none; }
+        html.light .theme-toggle .icon-sun { display: none; } html.light .theme-toggle .icon-moon { display: inline; }
+        html.light .theme-toggle { box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+
+        @keyframes fadeup { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.75s ease, transform 0.75s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem 1.5rem; }
+            .nav-links { gap: 0.9rem; }
+            .nav-link { font-size: 0.5rem; }
+            .prose { font-size: 1.05rem; }
+            .prose-wrap { padding: 1.5rem 1.5rem 3rem; }
+            .breadcrumb { padding: 0.5rem 1.5rem; }
+        }
+    
+        /* ── Badge Nouveau ── */
+        .badge-new {
+            font-family: var(--font-title);
+            font-size: 0.38rem; letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--bg-deep); background: var(--orange);
+            padding: 0.1rem 0.3rem; border-radius: 2px;
+            margin-left: 0.3rem; vertical-align: middle;
+            animation: pulse-badge 2s ease infinite;
+        }
+        @keyframes pulse-badge {
+            0%, 100% { opacity: 1; } 50% { opacity: 0.55; }
+        }
+    
+        /* ── Sound toggle ── */
+        .sound-toggle {
+            position: fixed; bottom: 1.8rem; right: 5.2rem; z-index: 200;
+            width: 46px; height: 46px;
+            border: 1px solid var(--border); border-radius: 50%;
+            background: var(--bg-card); color: var(--text-muted);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; transition: all 0.3s ease;
+            backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .sound-toggle:hover {
+            transform: scale(1.1);
+            border-color: var(--orange);
+            color: var(--orange);
+            box-shadow: 0 0 16px rgba(255,107,53,0.2);
+        }
+        .sound-toggle.active {
+            border-color: var(--orange);
+            color: var(--orange);
+            box-shadow: 0 0 16px rgba(255,107,53,0.25);
+        }
+    
+        /* ── HAMBURGER BUTTON ────────────────────────────────── */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 38px; height: 38px;
+            background: transparent;
+            border: 1px solid var(--border-cyan);
+            border-radius: 3px;
+            cursor: pointer;
+            padding: 0;
+            z-index: 200;
+            flex-shrink: 0;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        .nav-hamburger:hover {
+            background: var(--cyan-glow);
+            border-color: var(--cyan);
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 18px; height: 1px;
+            background: var(--cyan);
+            transition: transform 0.25s ease, opacity 0.25s ease;
+            transform-origin: center;
+        }
+        .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        /* ── MOBILE MENU OVERLAY ─────────────────────────────── */
+        .nav-mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 150;
+            background: rgba(6,6,13,0.97);
+            backdrop-filter: blur(18px);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            padding: 5rem 2rem 3rem;
+            opacity: 0;
+            transform: translateY(-12px);
+            transition: opacity 0.28s ease, transform 0.28s ease;
+            pointer-events: none;
+        }
+        .nav-mobile-overlay.open {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+        .nav-mobile-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+        }
+        .nav-mobile-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(0,212,255,0.015) 3px,
+                rgba(0,212,255,0.015) 4px
+            );
+            pointer-events: none;
+        }        html.light .nav-mobile-overlay {
+            background: rgba(208,208,220,0.97);
+        }
+        html.light .nav-mobile-link {
+            color: var(--text-muted);
+            border-bottom-color: var(--border);
+        }
+        html.light .nav-mobile-link:first-child {
+            border-top-color: var(--border);
+        }
+        html.light .nav-mobile-link:hover,
+        html.light .nav-mobile-link.active {
+            color: var(--cyan);
+            background: var(--cyan-glow);
+        }
+        html.light .nav-mobile-overlay::before {
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+        }
+        html.light .nav-mobile-overlay::after {
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(0,122,158,0.015) 3px,
+                rgba(0,122,158,0.015) 4px
+            );
+        }
+
+        .nav-mobile-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+            max-width: 320px;
+            position: relative;
+            z-index: 1;
+        }
+        .nav-mobile-link {
+            font-family: var(--font-title);
+            font-size: 0.9rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 1.1rem 1.5rem;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            transition: color 0.2s ease, background 0.2s ease;
+        }
+        .nav-mobile-link:first-child { border-top: 1px solid var(--border); }
+        .nav-mobile-link:hover,
+        .nav-mobile-link.active { color: var(--cyan); background: var(--cyan-glow); }
+        .nav-mobile-classified {
+            font-family: var(--font-title);
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--orange);
+            text-decoration: none;
+            padding: 1.1rem 1.5rem;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(255,107,53,0.35);
+            border-radius: 3px;
+            margin-top: 1.5rem;
+            transition: all 0.2s ease;
+            position: relative; z-index: 1;
+        }
+        .nav-mobile-classified:hover {
+            background: rgba(255,107,53,0.10);
+            border-color: var(--orange);
+        }
+        .nav-mobile-granted {
+            font-family: var(--font-title);
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            text-decoration: none;
+            padding: 1.1rem 1.5rem;
+            width: 100%;
+            text-align: center;
+            border: 1px solid var(--border-cyan);
+            border-radius: 3px;
+            margin-top: 1.5rem;
+            position: relative; z-index: 1;
+        }
+        .nav-mobile-status {
+            margin-top: 2rem;
+            display: flex; align-items: center; gap: 0.6rem;
+            font-family: var(--font-title); font-size: 0.52rem;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--text-muted);
+            position: relative; z-index: 1;
+        }
+
+        /* ── RESPONSIVE ──────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .navbar { padding: 0.9rem 1.2rem !important; }
+            .nav-links { display: none !important; }
+            .nav-status { display: none !important; }
+            .nav-hamburger { display: flex; }
+            .nav-mobile-overlay { display: flex; }
+        }
+        @media (max-width: 480px) {
+            .navbar { padding: 0.85rem 1rem !important; }
+        }
+
+        /* ── CLOSE BUTTON overlay ────────────────────────────── */
+        .nav-mobile-close {
+            position: absolute;
+            top: 1.2rem; right: 1.2rem;
+            width: 40px; height: 40px;
+            background: transparent;
+            border: 1px solid var(--border-cyan);
+            border-radius: 3px;
+            color: var(--cyan);
+            font-family: var(--font-title);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: border-color 0.2s ease, background 0.2s ease,
+                        box-shadow 0.2s ease;
+            z-index: 10;
+            flex-shrink: 0;
+        }
+        .nav-mobile-close:hover {
+            background: var(--cyan-glow);
+            border-color: var(--cyan);
+            box-shadow: 0 0 12px rgba(0,212,255,0.25);
+        }
+</style>
+</head>
+
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="navbar" id="navbar" aria-label="Navigation principale">
+    <a href="index.html" class="nav-brand">C.E.Rochard</a>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link">Univers</a>
+        <a href="roman.html" class="nav-link">Le Roman</a>
+        <a href="spin-off.html" class="nav-link">Le Spin-off</a>
+        <a href="chronologie.html" class="nav-link">Chronologie</a>
+        <a href="extrait.html" class="nav-link active" aria-current="page">Lire l'extrait</a>
+        <a href="carte-secteurs.html" class="nav-link">Carte</a>
+        <a href="profil-citoyen.html" class="nav-link">Profil</a>
+        <a href="dossier-omnis.html" class="nav-classified">🔒 Archives Classifiées</a>
+    </div>
+    <div class="nav-status"><span class="nav-dot"></span>Chapitre 1 — Extrait</div>
+    <!-- Hamburger mobile -->
+    <button class="nav-hamburger" id="navHamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+<!-- Menu mobile overlay -->
+<div class="nav-mobile-overlay" id="navMobileOverlay" aria-hidden="true">
+    <button class="nav-mobile-close" id="navMobileClose" aria-label="Fermer le menu">&#x2715;</button>
+    <div class="nav-mobile-links">
+        <a href="index.html" class="nav-mobile-link">Univers</a>
+        <a href="roman.html" class="nav-mobile-link">Le Roman</a>
+        <a href="spin-off.html" class="nav-mobile-link">Le Spin-off</a>
+        <a href="chronologie.html" class="nav-mobile-link">Chronologie</a>
+        <a href="extrait.html" class="nav-mobile-link active">Lire l'extrait</a>
+        <a href="carte-secteurs.html" class="nav-mobile-link">Carte</a>
+        <a href="profil-citoyen.html" class="nav-mobile-link">Profil</a>
+        <a href="dossier-omnis.html" class="nav-mobile-classified">🔒 Archives Classifiées</a>
+    </div>
+</div>
+
+<nav aria-label="Fil d'Ariane">
+  <ol class="breadcrumb">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="roman.html">Le Roman</a></li>
+    <li aria-current="page">Extrait</li>
+  </ol>
+</nav>
+
+
+<!-- EN-TÊTE DU CHAPITRE -->
+<header class="chapter-header reveal">
+    <div class="chapter-eyebrow">Code d'Inertie · Chapitre 1</div>
+    <h1 class="chapter-title">
+        <span class="o">Solde</span> : <span class="c">zéro</span>
+    </h1>
+    <p class="chapter-meta">
+        Thorne-394-V0
+        <span class="sep">·</span>
+        Secteur 7, Niveau 0
+        <span class="sep">·</span>
+        Cycle 14 — 06h12
+    </p>
+    <div class="chapter-divider"></div>
+</header>
+
+
+<!-- CORPS DU TEXTE -->
+<main>
+<div class="prose-wrap">
+<article class="prose reveal">
+
+<p>
+    La soudure sentait le métal brûlé et le plastique fondu. Thorne ne regardait pas l'étincelle.
+    Il regardait le chiffre dans le coin de son œil droit.
+</p>
+
+<span class="hud-line">
+    <span class="hv">OMNIS CORP · HUD v4.2 · SECTEUR 7 · 06:12:44</span><br>
+    SOLDE : <span class="hr">1 850 CR</span> &nbsp;|&nbsp; LAG : <span class="hr">0,5 s</span> &nbsp;|&nbsp; MASQUE : 18 % FUITE &nbsp;|&nbsp; PRIORITÉ : <span class="hr">V0 — STANDARD</span>
+</span>
+
+<p>
+    Mille huit cent cinquante crédits. Il avait fait le calcul ce matin, avant que le
+    <span class="term">Bio-DRM</span> ne déduise la nuit. Vingt-deux crédits pour huit heures de sommeil.
+    Le module respiratoire de Lara coûtait trente-six par cycle.
+    Sa propre ventilation basale en coûtait dix-neuf.
+    Les repas, il les comptait plus.
+</p>
+
+<p>
+    La valve qu'il réparait était coincée à quarante centimètres dans le conduit.
+    Système de recyclage d'air, Tunnel B-7, tronçon nord.
+    Trois fois cette semaine. Toujours le même joint de céramique qui craquait.
+    Thorne connaissait la raison — le conduit vibrait à une fréquence légèrement trop haute
+    depuis qu'on avait boosté les turbines du Niveau 3 — mais personne n'avait demandé
+    son diagnostic. On lui avait demandé de réparer le joint.
+</p>
+
+<p>
+    Il répara le joint.
+</p>
+
+<div class="scene-break">·&nbsp;&nbsp;·&nbsp;&nbsp;·</div>
+
+<p>
+    Le message de Mira arrive à 06h19.
+    Pas un message. Un signal d'alerte du système médical — un <span class="sys">FLAG-NON-PRIORITAIRE</span>
+    automatique, généré par l'algorithme de triage de la Clinique Réseau 7.
+    Trois lignes en rouge dans le coin de son œil.
+</p>
+
+<span class="hud-line">
+    <span class="hr">⚠ ALERTE MÉDICALE — PATIENT : LARA-394-W0</span><br>
+    Statut respiratoire : dégradé / Module : 34 % capacité<br>
+    Reclassification en cours → <span class="hr">NON-PRIORITAIRE</span><br>
+    Prochaine déduction automatique suspendue — solde insuffisant estimé
+</span>
+
+<p>
+    Thorne retira la soudure du conduit.
+    Posa l'outil. Regarda ses mains.
+</p>
+
+<p>
+    Non-Prioritaire voulait dire que le <span class="term">réseau Omnis</span> ne garantissait plus
+    la continuité de service. Ça voulait dire que la prochaine déduction
+    — trente-six crédits pour le module de Lara — serait conditionnée à la
+    disponibilité du solde. Et si le solde n'était pas là au moment du prélèvement,
+    le module passait en mode économie.
+</p>
+
+<p>
+    Mode économie. Soixante pour cent du débit nominal.
+    Pour une enfant de sept ans avec une fibrose bronchique de stade deux.
+</p>
+
+<p>
+    Il fit le calcul dans sa tête. Pas besoin du HUD.
+    Le HUD, lui, avait déjà commencé à clignoter doucement sur le bord droit de son champ
+    visuel — un rappel de décompte. Dix-huit heures avant le prochain prélèvement.
+    Mille huit cent cinquante crédits. Cinquante-cinq de dépenses fixes par cycle.
+    Trente de marge. Zéro de réserve.
+</p>
+
+<p>
+    Thorne récupéra l'outil. Rangea la soudure dans la sacoche de maintenance.
+    Referma le panneau de conduit.
+</p>
+
+<p>
+    Il y avait un contrat — un vrai — qui attendait au Secteur 4.
+    Un technicien V1 avec une accréditation Omnis C2, deux fois son tarif horaire,
+    pour une réparation de système de filtration dans un bloc résidentiel Élite.
+    Thorne avait le niveau technique. Pas l'accréditation.
+</p>
+
+<p>
+    Il existait des gens qui vendaient des accréditations falsifiées.
+    Il le savait parce que trois semaines plus tôt, un gamin de son couloir avait essayé.
+    Le <span class="term">protocole Shérif</span> l'avait repéré en quarante secondes.
+    Déduction automatique : cinq mille crédits. Plus une semaine de blocage de module.
+</p>
+
+<p>
+    Thorne remonta le tunnel B-7.
+    La lumière ici était orange, la couleur réglementaire du niveau sous-sol.
+    Pas de fenêtres. Pas de ciel. Juste la paroi en béton composite
+    et le bruit permanent des ventilateurs qu'il passait sa vie à entretenir.
+</p>
+
+<div class="scene-break">·&nbsp;&nbsp;·&nbsp;&nbsp;·</div>
+
+<p>
+    Lara dormait encore quand il rentra.
+    Le module respiratoire était posé sur la table de chevet —
+    un boîtier blanc de la taille d'une brique, avec un câble souple
+    qui se connectait à la <span class="term">puce C4</span> implantée dans sa nuque.
+    Le voyant était jaune.
+</p>
+
+<p>
+    Vert voulait dire nominal. Jaune voulait dire alerte. Rouge voulait dire urgence.
+    Il n'avait jamais vu le rouge. Il avait peur du rouge
+    avec la précision froide d'un ingénieur qui comprend exactement
+    ce que signifient les états d'un système.
+</p>
+
+<p>
+    Il s'assit sur le bord du lit. Écouta sa respiration.
+    Régulière. Un peu trop courte. Un bruit léger à l'expiration —
+    pas un râle, pas encore, juste une résistance,
+    comme de l'air qui passait dans un conduit légèrement rétréci.
+</p>
+
+<p>
+    Il connaissait ce bruit.
+    C'était le bruit des tuyaux dans les tunnels B-7
+    quand la pression chutait de dix pour cent.
+</p>
+
+<p>
+    Il posa la main sur le bord du module. Ne le toucha pas.
+    Le système de santé de La Ruche ne remboursait pas les interventions
+    sur les Non-Prioritaires. Pas de marge de crédit, pas de crédit médical,
+    pas de recours. La <span class="term">puce C4</span> enregistrait tout.
+    Si quelqu'un tentait de modifier un module sans accréditation,
+    le protocole de sécurité déclenchait une déduction corrective
+    et un signalement automatique.
+</p>
+
+<p>
+    Thorne savait cela.
+    Il savait aussi qu'il existait, quelque part dans la Tour Synthetix,
+    un registre de processeurs d'accréditation médicale de niveau C3.
+    Il l'avait lu dans un vieux document de maintenance
+    trouvé dans la base de données interne — un fichier mal indexé,
+    oublié dans les archives techniques du Secteur 4.
+</p>
+
+<p>
+    Un processeur C3 permettait de modifier le statut de priorité d'un patient.
+    De le faire passer de Non-Prioritaire à Prioritaire.
+    Rétroactivement. Définitivement.
+</p>
+
+<p>
+    Thorne n'était pas un voleur.
+    Mais il était technicien depuis douze ans.
+    Et il savait exactement comment fonctionnaient les systèmes
+    quand personne ne regardait.
+</p>
+
+</article>
+
+<!-- Note de fin -->
+<div class="reveal" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center;">
+    <p style="font-family: var(--font-title); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim);">— Fin de l'extrait — Chapitre 1 sur 38 —</p>
+</div>
+
+</div>
+</main>
+
+
+<!-- CTA NEWSLETTER -->
+<section class="cta-section reveal">
+    <p class="cta-eyebrow">La suite vous attend</p>
+    <p class="cta-title">Thorne entre dans la Tour.<br>Vous n'étiez pas censé lire ça.</p>
+    <p class="cta-sub">
+        Rejoignez la liste prioritaire et recevez le <strong>Dossier #001 : Anatomie de La Ruche</strong>
+        en avant-première — le document classifié qui cartographie l'univers en détail.
+    </p>
+    <div class="cta-actions">
+        <a href="index.html#newsletter" class="btn-primary">Recevoir le dossier <span>→</span></a>
+        <a href="roman.html" class="btn-ghost">← Le Roman</a>
+    </div>
+</section>
+
+
+<!-- FOOTER -->
+<!-- CODE: 7-SECT0RS-1-ARCHE -->
+<footer class="footer">
+    <div class="footer-inner">
+        <span class="easter-egg" title="Fréquence de Lara : 442Hz" data-code="442Hz" tabindex="0" aria-label="Fragment classifié #442">[FRAGMENT-442]</span>
+        
+        <!-- Easter egg : compteur de visites — logo × 5 -->
+        <span id="visitCounter" tabindex="0"
+              style="position:absolute;opacity:0;pointer-events:none;font-family:'Orbitron',monospace;font-size:0.48rem;letter-spacing:0.15em;color:var(--cyan);transition:opacity 0.4s;"
+              title="Archive de navigation personnelle">
+            [VISITES: <span id="visitCount">???</span>]
+        </span>
+        <div class="footer-brand">Code d'Inertie : Chaque respiration a un prix — C.E.Rochard</div>
+        <nav class="footer-nav" aria-label="Liens de pied de page">
+          <a href="index.html">Univers</a>
+          <a href="carte-secteurs.html">Carte</a>
+          <a href="chronologie.html">Chronologie</a>
+          <a href="profil-citoyen.html">Profil Citoyen</a>
+          <a href="roman.html">Le Roman</a>
+          <a href="spin-off.html">Le Spin-off</a>
+          <a href="dossier-omnis.html">Archives Classifiées</a>
+          <a href="a-propos.html">L'auteur</a>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="politique-confidentialite.html">Confidentialité</a>
+        </nav>
+        <p class="footer-copy">Copyright &copy; 2026 &mdash; C.E.Rochard. Tous droits réservés.</p>
+    </div>
+</footer>
+
+<button class="sound-toggle" id="soundToggle" aria-label="Activer le son ambiant de La Ruche" aria-pressed="false" title="Son ambiant — Tunnels B-7">🔇</button>
+<button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème clair/sombre" aria-pressed="false" title="Basculer le thème">
+    <span class="icon-sun">☀</span>
+    <span class="icon-moon">☾</span>
+</button>
+
+<style>
+    .easter-egg { position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; }
+    .easter-egg:focus { outline: 1px solid var(--cyan); opacity: 1; width: auto; height: auto; padding: 0.2rem 0.5rem; overflow: visible; position: static; pointer-events: auto; }
+</style>
+
+<script>
+    /* Navbar scroll */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+
+    /* Reveal on scroll */
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); } });
+    }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* Barre de progression */
+    (function() {
+        const bar = document.getElementById('progressBar');
+        if (!bar) return;
+        window.addEventListener('scroll', function() {
+            const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+            bar.style.width = Math.min(scrolled * 100, 100) + '%';
+        }, { passive: true });
+    })();
+
+    /* Theme toggle */
+    (function() {
+        
+    /* ── Dark mode automatique (préférence système) ── */
+    (function() {
+        const stored = localStorage.getItem('dossier-theme');
+        if (!stored) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                document.documentElement.classList.add('light');
+            }
+        }
+    })();
+    if (localStorage.getItem('dossier-theme') === 'light') document.documentElement.classList.add('light');
+        const btn = document.getElementById('themeToggle');
+        if (btn) btn.addEventListener('click', function() {
+            document.documentElement.classList.toggle('light');
+            localStorage.setItem('dossier-theme', document.documentElement.classList.contains('light') ? 'light' : 'dark');
+        });
+    })();
+</script>
+
+<script>
+/* ── Compteur de visites (Easter egg — logo × 5) ── */
+    (function() {
+        const visits = parseInt(localStorage.getItem('olymos-visits') || '0') + 1;
+        localStorage.setItem('olymos-visits', visits);
+        let logoClicks = 0;
+        const brand = document.querySelector('.nav-brand');
+        const counter = document.getElementById('visitCounter');
+        const countEl = document.getElementById('visitCount');
+        if (!brand || !counter) return;
+        brand.addEventListener('click', function(e) {
+            logoClicks++;
+            if (logoClicks >= 5) {
+                e.preventDefault();
+                if (countEl) countEl.textContent = visits.toLocaleString('fr-FR');
+                counter.style.opacity = '1';
+                counter.style.pointerEvents = 'auto';
+                setTimeout(() => {
+                    counter.style.opacity = '0';
+                    counter.style.pointerEvents = 'none';
+                    logoClicks = 0;
+                }, 4000);
+            }
+        });
+    })();
+
+    /* ── Service Worker (PWA — lecture hors-ligne) ── */
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js').catch(function() {});
+        });
+    }
+/* ═══════════════════════════════════════════════════
+       Son ambiant — Tunnels B-7, Secteur 7
+       ═══════════════════════════════════════════════════ */
+    (function() {
+        var btn = document.getElementById('soundToggle');
+        if (!btn) return;
+
+        var ctx = null;
+        var master = null;
+        var playing = false;
+        var stopTimer = null;
+
+        function setup() {
+            if (ctx) return; /* déjà initialisé */
+            ctx = new (window.AudioContext || window.webkitAudioContext)();
+            master = ctx.createGain();
+            master.gain.value = 0;
+            master.connect(ctx.destination);
+
+            /* Drone 55 Hz */
+            var o1 = ctx.createOscillator();
+            o1.type = 'sawtooth'; o1.frequency.value = 55;
+            var f1 = ctx.createBiquadFilter(); f1.type = 'lowpass'; f1.frequency.value = 280;
+            var g1 = ctx.createGain(); g1.gain.value = 0.55;
+            o1.connect(f1); f1.connect(g1); g1.connect(master); o1.start();
+
+            /* Harmonique 110.4 Hz */
+            var o2 = ctx.createOscillator();
+            o2.type = 'sawtooth'; o2.frequency.value = 110.4;
+            var f2 = ctx.createBiquadFilter(); f2.type = 'lowpass'; f2.frequency.value = 380;
+            var g2 = ctx.createGain(); g2.gain.value = 0.28;
+            o2.connect(f2); f2.connect(g2); g2.connect(master); o2.start();
+
+            /* Souffle bruit blanc */
+            var buf = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
+            var d = buf.getChannelData(0);
+            for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2) - 1;
+            var noise = ctx.createBufferSource();
+            noise.buffer = buf; noise.loop = true;
+            var fn = ctx.createBiquadFilter(); fn.type = 'bandpass'; fn.frequency.value = 420;
+            var gn = ctx.createGain(); gn.gain.value = 0.05;
+            noise.connect(fn); fn.connect(gn); gn.connect(master); noise.start();
+
+            /* LFO lent */
+            var lfo = ctx.createOscillator();
+            lfo.type = 'sine'; lfo.frequency.value = 0.07;
+            var lg = ctx.createGain(); lg.gain.value = 0.01;
+            lfo.connect(lg); lg.connect(master.gain); lfo.start();
+        }
+
+        function fadeIn(fast) {
+            setup();
+            if (stopTimer) { clearTimeout(stopTimer); stopTimer = null; }
+            ctx.resume();
+            master.gain.cancelScheduledValues(ctx.currentTime);
+            master.gain.value = 0;
+            master.gain.linearRampToValueAtTime(0.04, ctx.currentTime + (fast ? 0.4 : 3));
+        }
+
+        function fadeOut() {
+            if (!ctx) return;
+            master.gain.cancelScheduledValues(ctx.currentTime);
+            master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
+            master.gain.linearRampToValueAtTime(0, ctx.currentTime + 1.5);
+            stopTimer = setTimeout(function() {
+                ctx.suspend(); stopTimer = null;
+            }, 1800);
+        }
+
+        function setBtn(on) {
+            btn.textContent = on ? '🔊' : '🔇';
+            btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+            btn.classList.toggle('active', on);
+            btn.title = on ? 'Son actif — Tunnels B-7' : 'Activer le son ambiant';
+        }
+
+        btn.addEventListener('click', function() {
+            playing = !playing;
+            setBtn(playing);
+            if (playing) {
+                fadeIn(false);
+                localStorage.setItem('olymos-sound', '1');
+            } else {
+                fadeOut();
+                localStorage.setItem('olymos-sound', '0');
+            }
+        });
+
+        /* Persistance entre pages */
+        if (localStorage.getItem('olymos-sound') === '1') {
+            playing = true;
+            setBtn(true);
+            /* Démarrer dès la première interaction pour contourner autoplay policy */
+            function resume(e) {
+                if (e.target === btn) return; /* le clic sur le bouton gère lui-même */
+                fadeIn(true);
+                document.removeEventListener('click',   resume);
+                document.removeEventListener('scroll',  resume);
+                document.removeEventListener('keydown', resume);
+            }
+            document.addEventListener('click',  resume, { once: true });
+            document.addEventListener('scroll', resume, { once: true, passive: true });
+            document.addEventListener('keydown', resume, { once: true });
+        }
+    })();
+</script>
+
+
+
+<script>
+/* ── Menu hamburger mobile ── */
+(function() {
+    var btn = document.getElementById('navHamburger');
+    var overlay = document.getElementById('navMobileOverlay');
+    if (!btn || !overlay) return;
+    function openMenu() {
+        btn.classList.add('open');
+        overlay.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+        btn.classList.remove('open');
+        overlay.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+    btn.addEventListener('click', function() {
+        btn.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    var closeBtn = document.getElementById('navMobileClose');
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeMenu();
+    });
+})();
+</script>
+
+</body>
+</html>
