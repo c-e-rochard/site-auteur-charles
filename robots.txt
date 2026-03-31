@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Pages réservées aux abonnés — pas d'indexation
+Disallow: /carte-secteurs.html
+Disallow: /chronologie.html
+Disallow: /profil-citoyen.html
+Disallow: /dossier-omnis.html
+Disallow: /confirmation.html
+Disallow: /extrait.html
+
+Sitemap: https://cerochard.com/sitemap.xml
